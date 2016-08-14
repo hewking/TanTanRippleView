@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="hewking.github.customviewdemo.MainActivity">
+
+    <!--<hewking.github.customviewdemo.com.hewking.widget.PopupView-->
+        <!--android:id="@+id/popupview"-->
+    <!--android:layout_width="300dp"-->
+    <!--android:foregroundGravity="center"-->
+        <!--android:visibility="gone"-->
+    <!--android:layout_height="100dp" />-->
+    <!--<hewking.github.customviewdemo.com.hewking.widget.HCircleView-->
+        <!--android:layout_width="300dp"-->
+        <!--android:foregroundGravity="center"-->
+        <!--android:visibility="gone"-->
+        <!--android:layout_height="300dp" />-->
+    <!--<hewking.github.customviewdemo.com.hewking.widget.BlockView-->
+        <!--android:layout_width="300dp"-->
+        <!--android:visibility="gone"-->
+        <!--android:layout_height="200dp" />-->
+
+    <!--<hewking.github.customviewdemo.com.hewking.widget.MarqueTextView-->
+        <!--android:id="@+id/tv_marque"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    <hewking.github.customviewdemo.com.hewking.widget.TanTanpaneView
+        android:layout_gravity="center"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>
