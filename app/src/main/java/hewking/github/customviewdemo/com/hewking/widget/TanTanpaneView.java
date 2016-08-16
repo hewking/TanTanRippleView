@@ -2,7 +2,11 @@ package hewking.github.customviewdemo.com.hewking.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.SweepGradient;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -22,8 +26,10 @@ public class TanTanpaneView extends View {
     private int mWidth;
 
     private Paint mPaint;
+    private Paint mGradientPaint;
+    private Matrix rotateMatrix;
 
-    float mRippleRadius = 4;
+    private int start;
 
     private List<Integer> mAlphaPaint = new ArrayList<>();
     private List<Float> mWidthStart = new ArrayList<>();
@@ -39,7 +45,26 @@ public class TanTanpaneView extends View {
     public TanTanpaneView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
+        Handler.post(rotateRunnable);
     }
+
+    private android.os.Handler Handler = new android.os.Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+
+            super.handleMessage(msg);
+        }
+    };
+
+    private Runnable rotateRunnable = new Runnable() {
+        @Override
+        public void run() {
+            rotateMatrix = new Matrix();
+            rotateMatrix.postRotate(start++,mWidth / 2,mHeight / 2);
+            TanTanpaneView.this.invalidate();
+            Handler.postDelayed(rotateRunnable,60);
+        }
+    };
 
     private void init() {
         mPaint = new Paint();
@@ -47,6 +72,13 @@ public class TanTanpaneView extends View {
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setAntiAlias(true);
         mPaint.setColor(0xFFD72E1F);
+        mGradientPaint = new Paint();
+        mGradientPaint.setStrokeWidth(3);
+        mGradientPaint.setAntiAlias(true);
+        mGradientPaint.setColor(0xFFD72E1F);
+        SweepGradient shader = new SweepGradient(mWidth / 2, mHeight / 2 , Color.TRANSPARENT,0xFFD72E1F);
+        mGradientPaint.setShader(shader);
+        rotateMatrix = new Matrix();
     }
 
     @Override
@@ -69,6 +101,7 @@ public class TanTanpaneView extends View {
     private void startRippleAnim() {
         mAlphaPaint.add(255);
         mWidthStart.add(mHeight / 8.0f);
+        invalidate();
     }
 
 
@@ -98,7 +131,11 @@ public class TanTanpaneView extends View {
                 mWidthStart.remove(i);
             }
         }
-        invalidate();
+        canvas.concat(rotateMatrix);
+        canvas.drawCircle(mWidth / 2 ,mHeight / 2,mWidth / 2,mGradientPaint);
+        if(mAlphaPaint.size() != 0){
+            invalidate();
+        }
         super.onDraw(canvas);
     }
 }
