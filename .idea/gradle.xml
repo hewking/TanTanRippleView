@@ -3,14 +3,14 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="distributionType" value="LOCAL" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="$PROJECT_DIR$/../android-studio-ide-143.2443734-windows/android-studio/gradle/gradle-2.8" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/quicksort" />
+            <option value="$PROJECT_DIR$/thinkjava" />
           </set>
         </option>
         <option name="myModules">
@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/quicksort" />
+            <option value="$PROJECT_DIR$/thinkjava" />
           </set>
         </option>
       </GradleProjectSettings>

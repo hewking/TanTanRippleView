@@ -1,15 +1,20 @@
 package com.example;
 
+import java.text.SimpleDateFormat;
+
 public class QuickSort {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         int[] arr = {49,38,65,97,76,13,27};
-        quickSort(0,arr.length - 1,arr);
-        System.out.println("ssss");
-        for (int i : arr) {
-            System.out.println(i);
-        }
+//        quickSort(0,arr.length - 1,arr);
+//        System.out.println("ssss");
+//        for (int i : arr) {
+//            System.out.println(i);
+//        }
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println(format.format(System.currentTimeMillis()));
     }
 
     public static void quickSort(int left , int right , int[] arr) {

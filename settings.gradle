@@ -1,1 +1,1 @@
-include ':app', ':quicksort'
+include ':app', ':quicksort', ':thinkjava'

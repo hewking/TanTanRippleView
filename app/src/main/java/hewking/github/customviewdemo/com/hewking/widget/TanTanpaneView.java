@@ -60,9 +60,10 @@ public class TanTanpaneView extends View {
         @Override
         public void run() {
             rotateMatrix = new Matrix();
-            rotateMatrix.postRotate(start++,mWidth / 2,mHeight / 2);
+            start+= 2;
+            rotateMatrix.postRotate(start,mWidth / 2,mHeight / 2);
             TanTanpaneView.this.invalidate();
-            Handler.postDelayed(rotateRunnable,60);
+            Handler.postDelayed(rotateRunnable,10);
         }
     };
 
