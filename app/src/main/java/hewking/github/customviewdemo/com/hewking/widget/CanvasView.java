@@ -18,5 +18,10 @@ public class CanvasView extends View {
 
     public CanvasView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
+    }
+
+    private void init() {
+        
     }
 }
