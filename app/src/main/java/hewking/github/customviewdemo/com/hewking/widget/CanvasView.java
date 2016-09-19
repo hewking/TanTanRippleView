@@ -1,6 +1,7 @@
 package hewking.github.customviewdemo.com.hewking.widget;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -22,6 +23,6 @@ public class CanvasView extends View {
     }
 
     private void init() {
-        
+        Paint p = new Paint();
     }
 }
