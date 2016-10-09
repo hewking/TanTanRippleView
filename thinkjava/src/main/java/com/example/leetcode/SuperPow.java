@@ -9,7 +9,8 @@ public class SuperPow {
 
 
     public static void main(String[] args){
-        int result = superPow(2,new int[]{1,0,2,4});
+//        int result = superPow(2,new int[]{1,0,2,4});
+        String result = int2Array(1024);
         System.out.println(result);
     }
 
@@ -29,6 +30,17 @@ public class SuperPow {
         }
 
         return result;
+    }
+
+    public static String int2Array(int a){
+        StringBuilder sb = new StringBuilder();
+        while (a / 10 != 0){
+            int mode  = a % 10;
+            a = a / 10;
+            sb.append(mode);
+        }
+        sb.append(a);
+        return sb.toString();
     }
 
 }

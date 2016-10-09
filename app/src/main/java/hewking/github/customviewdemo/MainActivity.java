@@ -2,6 +2,7 @@ package hewking.github.customviewdemo;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 
 import hewking.github.customviewdemo.com.hewking.widget.MarqueTextView;
 
@@ -14,7 +15,12 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final int i = 10;
+        getWindow().getDecorView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
         initView();
     }
 

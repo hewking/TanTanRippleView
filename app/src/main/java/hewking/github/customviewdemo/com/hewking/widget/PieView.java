@@ -46,8 +46,8 @@ public class PieView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        mHeight = 400;
-        mWidth = 400;
+        mHeight = w;
+        mWidth = h;
     }
 
     private void init() {
@@ -96,8 +96,8 @@ public class PieView extends View {
         if(datas == null && datas.size()  == 0){
             return;
         }
-        int r = (int) (Math.min(mWidth,mHeight) * 0.8);
-        canvas.translate(mWidth / 2 , mHeight / 2);
+        int r = (int) (Math.min(mWidth,mHeight) / 2 * 0.8);
+        canvas.translate(mHeight / 2 , mHeight / 2);
         RectF rect = new RectF(-r,-r,r,r);
         for(int i = 0 ; i < datas.size() ; i ++){
             PieData pieData = datas.get(i);
