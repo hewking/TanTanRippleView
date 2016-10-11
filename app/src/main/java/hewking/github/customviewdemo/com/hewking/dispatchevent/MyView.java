@@ -4,14 +4,14 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.widget.RelativeLayout;
+import android.view.View;
 
 /**
  * Created by Administrator on 2016/10/9.
  * <p>
  * 联系方式：。。。
  */
-public class MyView extends RelativeLayout {
+public class MyView extends View {
 
     public static final String TAG = MyView.class.getSimpleName();
 

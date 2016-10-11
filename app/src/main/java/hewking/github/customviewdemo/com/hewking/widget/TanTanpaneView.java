@@ -35,11 +35,11 @@ public class TanTanpaneView extends View {
     private List<Float> mWidthStart = new ArrayList<>();
 
     public TanTanpaneView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public TanTanpaneView(Context context, AttributeSet attrs) {
-        this(context, attrs,0);
+        this(context, attrs, 0);
     }
 
     public TanTanpaneView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -48,7 +48,7 @@ public class TanTanpaneView extends View {
         Handler.post(rotateRunnable);
     }
 
-    private android.os.Handler Handler = new android.os.Handler(){
+    private android.os.Handler Handler = new android.os.Handler() {
         @Override
         public void handleMessage(Message msg) {
 
@@ -60,10 +60,10 @@ public class TanTanpaneView extends View {
         @Override
         public void run() {
             rotateMatrix = new Matrix();
-            start+= 2;
-            rotateMatrix.postRotate(start,mWidth / 2,mHeight / 2);
+            start += 2;
+            rotateMatrix.postRotate(start, mWidth / 2, mHeight / 2);
             TanTanpaneView.this.invalidate();
-            Handler.postDelayed(rotateRunnable,10);
+            Handler.postDelayed(rotateRunnable, 10);
         }
     };
 
@@ -73,25 +73,27 @@ public class TanTanpaneView extends View {
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setAntiAlias(true);
         mPaint.setColor(0xFFD72E1F);
+
+
         mGradientPaint = new Paint();
         mGradientPaint.setStrokeWidth(3);
         mGradientPaint.setAntiAlias(true);
-        mGradientPaint.setColor(0xFFD72E1F);
-        SweepGradient shader = new SweepGradient(mWidth / 2, mHeight / 2 , Color.TRANSPARENT,0xFFD72E1F);
+        mGradientPaint.setColor(0xFFBC131F);
+        SweepGradient shader = new SweepGradient(mWidth / 2, mHeight / 2, Color.TRANSPARENT, 0xFFD72E1F);
         mGradientPaint.setShader(shader);
         rotateMatrix = new Matrix();
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
-        switch (event.getAction()){
+        Log.e(TAG, "onTouchEvent : " + event.getAction());
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 break;
             case MotionEvent.ACTION_MOVE:
                 break;
             case MotionEvent.ACTION_UP:
-                Log.e(TAG,"onTouchEvent : " + event.getAction());
+                Log.e(TAG, "onTouchEvent : " + event.getAction());
                 startRippleAnim();
                 break;
         }
@@ -105,15 +107,20 @@ public class TanTanpaneView extends View {
         invalidate();
     }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        Log.e(TAG, "dispatchTouchEvent : " + event.getAction());
+        return super.dispatchTouchEvent(event);
+    }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int wMode = MeasureSpec.getMode(widthMeasureSpec);
-        if(MeasureSpec.EXACTLY == wMode){
+        if (MeasureSpec.EXACTLY == wMode) {
             mWidth = MeasureSpec.getSize(widthMeasureSpec);
         }
         int hMode = MeasureSpec.getMode(heightMeasureSpec);
-        if(MeasureSpec.EXACTLY == hMode){
+        if (MeasureSpec.EXACTLY == hMode) {
             mHeight = MeasureSpec.getSize(heightMeasureSpec);
         }
         setMeasuredDimension(widthMeasureSpec, heightMeasureSpec);
@@ -121,22 +128,22 @@ public class TanTanpaneView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-
-        for (int i = 0 ; i < mAlphaPaint.size() ; i++){
+        for (int i = 0; i < mAlphaPaint.size(); i++) {
             mPaint.setAlpha(mAlphaPaint.get(i));
-            canvas.drawCircle(mWidth / 2 , mHeight / 2,mWidthStart.get(i)+ 30,mPaint);
-            mAlphaPaint.set(i,mAlphaPaint.get(i) - 1);
-            mWidthStart.set(i,mWidthStart.get(i) + 1);
-            if(mAlphaPaint.get(i) == 0){
+            canvas.drawCircle(mWidth / 2, mHeight / 2, mWidthStart.get(i) + 30, mPaint);
+            mAlphaPaint.set(i, mAlphaPaint.get(i) - 1);
+            mWidthStart.set(i, mWidthStart.get(i) + 1);
+            if (mAlphaPaint.get(i) == 0) {
                 mAlphaPaint.remove(i);
                 mWidthStart.remove(i);
             }
         }
         canvas.concat(rotateMatrix);
-        canvas.drawCircle(mWidth / 2 ,mHeight / 2,mWidth / 2,mGradientPaint);
-        if(mAlphaPaint.size() != 0){
+        canvas.drawCircle(mWidth / 2, mHeight / 2, mWidth / 2, mGradientPaint);
+        if (mAlphaPaint.size() != 0) {
             invalidate();
         }
         super.onDraw(canvas);
     }
+
 }

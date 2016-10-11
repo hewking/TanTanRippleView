@@ -25,7 +25,13 @@ public class MyRelativeLayout extends RelativeLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        return super.dispatchTouchEvent(ev);
+        boolean b = super.dispatchTouchEvent(ev);
+        if(ev.getAction() == MotionEvent.ACTION_UP){
+            for(int i = 0 ; i < getChildCount() ; i ++){
+                getChildAt(i).dispatchTouchEvent(ev);
+            }
+        }
+        return b;
     }
 
     @Override

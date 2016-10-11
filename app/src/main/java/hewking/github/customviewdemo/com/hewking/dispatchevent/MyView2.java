@@ -4,14 +4,14 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 /**
  * Created by Administrator on 2016/10/9.
  * <p>
  * 联系方式：。。。
  */
-public class MyView2 extends FrameLayout {
+public class MyView2 extends ImageView {
 
     public static final String TAG = MyView2.class.getSimpleName();
 
