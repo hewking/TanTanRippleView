@@ -5,8 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/CustomViewDemo.iml" filepath="$PROJECT_DIR$/CustomViewDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/TanTanPaneView.iml" filepath="$PROJECT_DIR$/TanTanPaneView.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/quicksort/quicksort.iml" filepath="$PROJECT_DIR$/quicksort/quicksort.iml" />
-      <module fileurl="file://$PROJECT_DIR$/thinkjava/thinkjava.iml" filepath="$PROJECT_DIR$/thinkjava/thinkjava.iml" />
     </modules>
   </component>
 </project>
