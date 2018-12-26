@@ -5,15 +5,20 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
+import android.support.v4.content.ContextCompat.getColor
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.LinearInterpolator
+import com.hewking.dp2px
+import com.hewking.getColor
 import hewking.github.customviewdemo.BuildConfig
+import hewking.github.customviewdemo.R
+
 import java.util.concurrent.CopyOnWriteArrayList
 
 /**
  * 项目名称：FlowChat
- * 类的描述：
+ * 类的描述：xfermode 的使用采用canvas.drawBitmap 的方式实现
  * 创建人员：hewking
  * 创建时间：2018/12/11 0011
  * 修改人员：hewking
@@ -21,7 +26,7 @@ import java.util.concurrent.CopyOnWriteArrayList
  * 修改备注：
  * Version: 1.0.0
  */
-class TideRippleView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
+class TideRippleView2(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
 
     private var radiuls: Int = 0
 
@@ -35,27 +40,27 @@ class TideRippleView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
         Paint().apply {
             style = Paint.Style.STROKE
             strokeWidth = dp2px(0.5f).toFloat()
-            color = Color.BLUE
+            color = getColor(R.color.pink_f5b8c2)
             isAntiAlias = true
         }
     }
 
     private val backPaint by lazy {
-         Paint().apply {
-             style= Paint.Style.FILL_AND_STROKE
-             isAntiAlias = true
-             strokeWidth = dp2px(0.5f).toFloat()
-         }
+        Paint().apply {
+            style = Paint.Style.FILL
+            isAntiAlias = true
+            strokeWidth = dp2px(0.5f).toFloat()
+        }
     }
 
     private var sweepProgress = 0
-    set(value) {
-        if (value >= 360) {
-            field = 0
-        } else {
-            field = value
+        set(value) {
+            if (value >= 360) {
+                field = 0
+            } else {
+                field = value
+            }
         }
-    }
     private var fps: Int = 0
     private var fpsPaint = Paint().apply {
         isAntiAlias = true
@@ -75,7 +80,7 @@ class TideRippleView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
                     addUpdateListener {
                         postInvalidateOnAnimation()
                         fps++
-                        sweepProgress ++
+                        sweepProgress++
 
                     }
                     addListener(object : AnimatorListenerAdapter() {
@@ -100,52 +105,74 @@ class TideRippleView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
         }
     }
 
-    var backCanvas : Canvas? = null
-    var backBitmap : Bitmap? = null
+    var backCanvas: Canvas? = null
+    var backBitmap: Bitmap? = null
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         backBitmap?.recycle()
-        if (w != 0 && h != 0){
-            backBitmap = Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888)
+        if (w != 0 && h != 0) {
+            backBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
             backCanvas = Canvas(backBitmap)
         }
     }
 
     override fun onDraw(canvas: Canvas?) {
         canvas ?: return
-        canvas.save()
-//        canvas.translate(width.div(2f),height.div(2f))
-        /*  rippleCircles.forEach {
-          }*/
-
         for (i in 0 until rippleCircles.size) {
             rippleCircles[i].draw(canvas)
         }
-        canvas.restore()
-        backCanvas?.let {
-            val maxRadius = Math.min(width, height).div(2).toFloat()
-            val radius = maxRadius.div(2)
-            it.save()
-//            backPaint.color = Color.WHITE
-            backPaint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.CLEAR))
-            it.drawPaint(backPaint)
-            backPaint.setXfermode(null)
-            it.rotate(sweepProgress.toFloat(),width.div(2f),height.div(2f))
-            backPaint.setShader(SweepGradient(width.div(2).toFloat(),height.div(2).toFloat(),Color.RED,Color.WHITE))
-            it.drawCircle(width.div(2).toFloat(),height.div(2).toFloat(),radius,backPaint)
-            backPaint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.SRC_OUT))
-//            backPaint.color = Color.TRANSPARENT
-            it.drawCircle(width.div(2f),height.div(2f),radius.div(3f),backPaint)
-            it.restore()
-            canvas.drawBitmap(backBitmap,0f,0f,null)
-        }
+        val maxRadius = Math.min(width, height).div(2).toFloat()
+        val radius = maxRadius.div(2)
+        canvas.save()
+        canvas.rotate(sweepProgress.toFloat(), width.div(2f), height.div(2f))
 
+        val colors = intArrayOf(getColor(R.color.pink_fa758a), getColor(R.color.pink_f5b8c2), getColor(R.color.top_background_color), getColor(R.color.white))
+        backPaint.setShader(SweepGradient(width.div(2).toFloat(), height.div(2).toFloat(), colors, floatArrayOf(0f, 0.001f, 0.9f, 1f)))
+        val rectF = RectF(width.div(2f) - radius
+                , height.div(2f) - radius
+                , width.div(2f) + radius
+                , height.div(2f) + radius)
+        val sc = canvas.saveLayer(rectF, backPaint, Canvas.ALL_SAVE_FLAG)
+//        canvas.drawBitmap(makeDst(), null,rectF, backPaint)
+        canvas.drawCircle(width.div(2).toFloat(), height.div(2).toFloat(), radius, backPaint)
+        backPaint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.DST_OUT))
+//        canvas.drawCircle(width.div(2f), height.div(2f), radius.div(3f), backPaint)
+/*        rectF.apply {
+            left = width.div(2f) - radius * 1f.div(3)
+            top = height.div(2f) - radius * 1f.div(3)
+            right = width.div(2f) + radius * 1f.div(3)
+            bottom = height.div(2f) + radius * 1f.div(3)
+        }
+        canvas.drawBitmap(makeSrc(),null,rectF,backPaint)*/
+        canvas.drawCircle(width.div(2f), height.div(2f), radius.div(3f), backPaint)
+        backPaint.setXfermode(null)
+        backPaint.setShader(null)
+        canvas.restoreToCount(sc)
+        canvas.restore()
 
         if (BuildConfig.DEBUG) {
             canvas.drawText(fps.toString(), paddingStart.toFloat()
                     , height - dp2px(10f).toFloat() - paddingBottom, fpsPaint)
         }
+    }
+
+    fun makeSrc(): Bitmap {
+        val size = Math.min(width, height).div(6)
+        val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        val radius = size.div(2f)
+        canvas.drawCircle(radius, radius, radius, backPaint)
+        return bitmap
+    }
+
+    fun makeDst(): Bitmap {
+        val size = Math.min(width, height).div(2)
+        val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        val radius = size.div(2f)
+        canvas.drawCircle(radius, radius, radius, backPaint)
+        return bitmap
     }
 
 
