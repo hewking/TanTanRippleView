@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="hewking.github.customviewdemo.MainActivity">
+    >
 
     <!--<hewking.github.customviewdemo.com.hewking.widget.PopupView-->
         <!--android:id="@+id/popupview"-->
@@ -29,18 +29,22 @@
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content" />-->
 
-    <hewking.github.customviewdemo.com.hewking.widget.TanTanpaneView
+ <!--   <hewking.github.customviewdemo.com.hewking.widget.TanTanpaneView
         android:layout_gravity="center"
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
+        android:layout_height="match_parent" />-->
+
+    <com.hewking.widget.TideRippleView
+        android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <ImageView
+<!--    <ImageView
         android:id="@+id/iv_head"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:src="@mipmap/user"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" />-->
     <!--<hewking.github.customviewdemo.com.hewking.widget.PieView-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent" />-->
