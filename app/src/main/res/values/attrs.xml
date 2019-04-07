@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="BlockView">
-        <attr name="border_color" format="color"></attr>
-        <attr name="border_width" format="dimension"></attr>
+    <declare-styleable name="CircleImageView">
+        <attr name="c_border_color" format="color"></attr>
+        <attr name="c_border_width" format="dimension"></attr>
     </declare-styleable>
 </resources>

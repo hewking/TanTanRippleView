@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<hewking.github.customviewdemo.com.hewking.dispatchevent.MyRelativeLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,49 +8,17 @@
     android:fitsSystemWindows="true"
     >
 
-    <!--<hewking.github.customviewdemo.com.hewking.widget.PopupView-->
-        <!--android:id="@+id/popupview"-->
-    <!--android:layout_width="300dp"-->
-    <!--android:foregroundGravity="center"-->
-        <!--android:visibility="gone"-->
-    <!--android:layout_height="100dp" />-->
-    <!--<hewking.github.customviewdemo.com.hewking.widget.HCircleView-->
-        <!--android:layout_width="300dp"-->
-        <!--android:foregroundGravity="center"-->
-        <!--android:visibility="gone"-->
-        <!--android:layout_height="300dp" />-->
-    <!--<hewking.github.customviewdemo.com.hewking.widget.BlockView-->
-        <!--android:layout_width="300dp"-->
-        <!--android:visibility="gone"-->
-        <!--android:layout_height="200dp" />-->
-
-    <!--<hewking.github.customviewdemo.com.hewking.widget.MarqueTextView-->
-        <!--android:id="@+id/tv_marque"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content" />-->
-
- <!--   <hewking.github.customviewdemo.com.hewking.widget.TanTanpaneView
-        android:layout_gravity="center"
-        android:layout_centerInParent="true"
+    <com.hewking.widget.TanTanRippleView
+        android:id="@+id/ripple"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />-->
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"/>
 
-    <com.hewking.widget.TideRippleView2
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-<!--    <ImageView
-        android:id="@+id/iv_head"
+    <com.hewking.widget.CircleImageView
+        android:id="@+id/iv_avatar"
+        android:src="@mipmap/nice_girl"
         android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:src="@mipmap/user"
-        android:layout_height="wrap_content" />-->
-    <!--<hewking.github.customviewdemo.com.hewking.widget.PieView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent" />-->
+        android:layout_width="120dp"
+        android:layout_height="120dp" />
 
-    <!--<hewking.github.customviewdemo.com.hewking.widget.CanvasView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content" />-->
-
-</hewking.github.customviewdemo.com.hewking.dispatchevent.MyRelativeLayout>
+</RelativeLayout>
