@@ -156,4 +156,3 @@ private val renderAnimator by lazy {
                          ObjectAnimator.ofFloat(v,"scaleY",1.2f,0.8f,1f));
                 set.setDuration(1100).start();
 ```
-有兴趣查看源码[我是源码](https://github.com/hewking/TanTanRippleView)，查看更多细节。
